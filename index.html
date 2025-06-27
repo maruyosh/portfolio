@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KUWAMOTO YOSHIYUKI PORTFOLIO</title>
+    <link rel="stylesheet" href="index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+    <script defer src="index.js"></script>
+</head>
+
+<body>
+
+    <div id="loading-screen">
+
+
+        <div class="loading-panel top">
+            <svg width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid meet">
+                <text class="loading-text-svg animate-right-to-left" x="50%" y="50%" dominant-baseline="middle"
+                    text-anchor="middle" stroke="white" stroke-width="2" fill="black">KUWAMOTO</text>
+            </svg>
+        </div>
+        <div class="loading-panel middle">
+            <svg width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid meet">
+                <text class="loading-text-svg animate-left-to-right" x="50%" y="50%" dominant-baseline="middle"
+                    text-anchor="middle" stroke="white" stroke-width="2" fill="black">YOSHIYUKI</text>
+            </svg>
+        </div>
+        <div class="loading-panel bottom">
+            <svg width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid meet">
+                <text class="loading-text-svg animate-right-to-left" x="50%" y="50%" dominant-baseline="middle"
+                    text-anchor="middle" stroke="white" stroke-width="2" fill="black">PORTFOLIO</text>
+            </svg>
+        </div>
+
+        <svg class="circle-text outer" viewBox="0 0 600 600">
+            <defs>
+                <path id="circlePathOuter" d="M 300, 300 m -280, 0 a 280,280 0 1,1 560,0 a 280,280 0 1,1 -560,0" />
+            </defs>
+            <text>
+                <textPath href="#circlePathOuter" startOffset="0%">
+                    "WELCOME TO MY PORTFOLIO SITE - FRONTEND & BACKEND DEVELOPMENT" -
+                    "WELCOME TO MY PORTFOLIO SITE - FRONTEND & BACKEND DEVELOPMENT" -
+                    "WELCOME TO MY PORTFOLIO SITE - FRONTEND & BACKEND DEVELOPMENT" -
+                    "WELCOME TO MY PORTFOLIO SITE - FRONTEND & BACKEND DEVELOPMENT" -
+                    "WELCOME TO MY PORTFOLIO SITE - FRONTEND & BACKEND DEVELOPMENT" -
+                </textPath>
+            </text>
+        </svg>
+
+        <svg class="circle-text inner" viewBox="0 0 600 600">
+            <defs>
+                <path id="circlePathInner" d="M 300, 300 m -240, 0 a 240,240 0 1,1 480,0 a 240,240 0 1,1 -480,0" />
+            </defs>
+            <text>
+                <textPath href="#circlePathInner" startOffset="0%">
+                    - "DESIGN" - "CODING" - "INNOVATION" -
+                    - "DESIGN" - "CODING" - "INNOVATION" -
+                    - "DESIGN" - "CODING" - "INNOVATION" -
+                    - "DESIGN" - "CODING" - "INNOVATION" -
+                    - "DESIGN" - "CODING" - "INNOVATION" -
+                    - "DESIGN" - "CODING" - "INNOVATION" -
+                </textPath>
+            </text>
+        </svg>
+
+
+        <button id="tap-button">TAP</button>
+
+        <div id="particle-container"></div>
+    </div>
+
+    <main>
+        <header>
+            <nav id="main-nav">
+                <ul class="section-buttons">
+                    <li><a href="#about" class="section-button"><span data-text="ABOUT"></span></a></li>
+                    <li><a href="#skills" class="section-button"><span data-text="SKILLS"></span></a></li>
+                    <li><a href="#works" class="section-button"><span data-text="WORKS"></span></a></li>
+                    <li><a href="#contact" class="section-button"><span data-text="CONTACT"></span></a></li>
+                </ul>
+            </nav>
+        </header>
+        <section id="about">
+            <h2>ABOUT ME</h2>
+            <div class="about-content">
+                <img src="image/MqZVZHyI_400x400.jpg" alt="プロフィール画像" class="profile-img">
+                <div class="about-text">
+                    <h3>桑本　祥行</h3>
+                    <ul>
+                        <li><strong>生年月日:</strong> 2004年4月16日</li>
+                        <li><strong>最終学歴:</strong> [北海道情報大学 情報メディア学部 情報メディア学科] 2027年3月卒業見込み</li>
+                    </ul>
+
+                    <p>
+                        私は、ユーザーに「使いやすい」「心地よい」と感じてもらえるWebサイトをデザインすることに魅力を感じ、Webデザイナーを目指しております。大学でのデザイン学習や個人でのWebサイト制作を通して、見た目の美しさだけでなく、情報設計やユーザーインターフェース（UI）、ユーザーエクスペリエンス（UX）の重要性についても深く学びました。常に新しいデザイントレンドや技術にアンテナを張り、ユーザー視点に立ったデザインを追求することで、貴社に貢献したいと考えております。
+                    </p>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>Adobe Photoshop</h3>
+                    <p>
+                        Webサイトのデザインカンプ作成、写真のレタッチ、バナー制作など、Photoshopを用いたグラフィックデザインスキルがあります。レイヤー管理、マスク機能、スマートオブジェクトなどを活用し、効率的かつ高品質なビジュアルを制作できます。Webサイトのトンマナに合わせた画像加工も得意です。
+                    </p>
+                </div>
+                <div class="skill-item">
+                    <h3>Adobe Illustrator</h3>
+                    <p>
+                        Webサイトで使用するロゴ、アイコン、イラストなどのベクター素材を制作できます。Illustratorのパスツールや図形ツールを使いこなし、デザインコンセプトに沿ったオリジナル素材を作成するスキルがあります。また、DTPデザインの基礎も理解しており、印刷物との連携も考慮したデザインが可能です。
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <h3>Figma</h3>
+                    <p>
+                        共同作業が可能なFigmaを用いて、Webサイトのワイヤーフレーム、デザインカンプ、プロトタイプの作成経験があります。コンポーネントの作成やスタイルガイドの適用により、効率的かつ一貫性のあるデザインワークフローを実践できます。
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <h3>HTML/CSS</h3>
+                    <p>
+                        デザインカンプを元に、セマンティックなHTML構造と、BEMなどの手法を取り入れた保守性の高いCSS設計を心がけています。レスポンシブデザインにも対応し、PC、タブレット、スマートフォンといった様々なデバイスで最適な表示と操作性を実現できます。また、CSSアニメーションやトランジションを用いて、Webサイトに動きと視覚的な楽しさを加えることも可能です。
+                    </p>
+                </div>
+                <div class="skill-item">
+                    <h3>JavaScript</h3>
+                    <p>
+                        Webサイトにインタラクティブな要素を加えるため、DOM操作、イベントハンドリング、非同期処理といったJavaScriptの基本的な知識を習得しています。スライダーやアコーディオンメニュー、フォームバリデーションなど、ユーザー体験を向上させるための実装経験があります。今後も、より高度な動的コンテンツの実装に挑戦していきたいと考えています。
+                    </p>
+                </div>
+        </section>
+
+        <section id="works">
+            <h2>WORKS</h2>
+
+            <div>
+                <p class="works-intro">
+                    これまでに取り組んできたWeb制作・グラフィックデザインの成果物を掲載しています。
+                    各作品では、目的に応じた設計・配色・レイアウトを意識し、ユーザー体験とビジュアルの両立を追求しました。
+                    デザインツールだけでなく、HTML/CSS/JavaScriptによる実装スキルも活かしています。
+                </p>
+            </div>
+
+            <div id="works-container">
+                <div id="all-works" class="works-grid" data-category="all">
+                    <div class="work-item" data-id="my-portfolio" data-category="web-development">
+                        <img src="image/portfoliopic.png" alt="ポートフォリオサイトのサムネイル">
+                        <div class="work-title-area">
+                            <h3>自身のポートフォリオサイト</h3>
+                        </div>
+                        <div class="work-detail">
+                            <p class="work-description">
+                                自身のWeb制作・デザインスキルを総合的に示すために企画・制作したサイトです。企画段階からターゲットユーザーを意識し、デザインと機能の両面から工夫を凝らしました。
+                            </p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> HTML, CSS, JavaScript</li>
+                                <li><strong>ポイント:</strong>
+                                    ローディング画面のアニメーションによるユーザーエンゲージメント向上、各セクションへのスムーズなナビゲーション、そして全てのデバイスで快適に閲覧できるレスポンシブ対応に注力しました。自己紹介ページのコンテンツ管理を意識した構造も特徴です。
+                                </li>
+                            </ul>
+                            <button class="view-details-button" data-id="my-portfolio"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+                    <div class="work-item" data-category="design">
+                        <img src="image/webzemi.png" alt="ゼミ紹介サイト サムネイル">
+                        <div class="work-title-area">
+                            <h3>ゼミ紹介サイト</h3>
+                        </div>
+                        <div class="work-detail">
+                            <p class="work-description">
+                                ゼミ選びに悩む学生のために、情報を整理し、直感的に比較できるよう設計されたゼミ紹介サイトのデザインです。構成・配色・UIすべてにおいて、閲覧者目線を重視しました。
+                            </p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> HTML, CSS, JavaScript</li>
+                                <li><strong>ポイント:</strong>
+                                    活動内容や傾向ごとのフィルタ機能、カード形式での比較のしやすさ、親しみやすい配色などを意識し、利用者が情報を迷わず取得できる構造にしました。</li>
+                            </ul>
+                            <button class="view-details-button" data-id="zemi-site" data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-category="design">
+                        <img src="image/06-02-s2321086.png" alt="Webサイトデザインサムネイル">
+                        <div class="work-title-area">
+                            <h3>Webサイトデザイン（架空カフェ）</h3>
+                        </div>
+                        <div class="work-detail">
+                            <p class="work-description">Adobe XDで作成したWebサイトのデザインです。ユーザーエクスペリエンスと視覚的な魅力を両立させることを目指しました。
+                            </p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe XD</li>
+                                <li><strong>ポイント:</strong> ユーザー導線を考慮したレイアウトと、ターゲット層に響く色使い・タイポグラフィに注力しました。</li>
+                            </ul>
+                            <button class="view-details-button" data-id="fake-cafe-website-design"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-id="website-design-xd-2" data-category="design">
+                        <img src="image/07-01_s2321086.png" alt="Webサイトデザイン2サムネイル">
+                        <div class="work-title-area">
+                            <h3>Webサイトデザイン（架空水族館）</h3>
+                        </div>
+                        <div class="work-detail">
+
+                            <p class="work-description">Adobe XDを用いて、特定のテーマに基づいたWebサイトのデザイン提案を行いました。モダンなデザイン要素を取り入れています。
+                            </p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe XD</li>
+                                <li><strong>ポイント:</strong> シンプルながらも目を引くビジュアルと、レスポンシブデザインを意識した構成が特徴です。</li>
+                            </ul>
+                            <button class="view-details-button" data-id="website-design-xd-aquarium"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-id="character-design" data-category="design">
+                        <img src="image/kyarafront.png" alt="キャラクターデザイン サムネイル">
+                        <div class="work-title-area">
+                            <h3>キャラクターデザイン</h3>
+                        </div>
+                        <div class="work-detail">
+
+                            <p class="work-description">
+                                サイトやフライヤーに展開可能なオリジナルキャラクターを制作しました。正面・背面など複数視点での描画を通して、世界観の一貫性と実用性のあるデザインを目指しました。
+                            </p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe Illustrator, Clipstudio</li>
+                                <li><strong>ポイント:</strong> 配色や輪郭線の統一感に配慮し、親しみやすさとデフォルメのバランスを意識しました。</li>
+                            </ul>
+                            <button class="view-details-button" data-id="character-design-work"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-id="flyer-design-old" data-category="design"> <img
+                            src="image/DTP_flyer_001_表_B6.png" alt="フライヤーデザイン サムネイル">
+                        <div class="work-title-area">
+                            <h3>フライヤーデザイン</h3>
+                        </div>
+                        <div class="work-detail">
+
+                            <p class="work-description">
+                                視認性と印象に残るデザインを両立したポスターを制作しました。情報の優先順位を整理し、見る人に伝えたい内容が一目で分かるよう構成しました。
+                            </p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe Illustrator, Clipstudio</li>
+                                <li><strong>ポイント:</strong> ターゲット層を意識した色使いやタイポグラフィで、視線誘導と訴求力を強化しました。</li>
+                            </ul>
+                            <button class="view-details-button" data-id="flyer-design"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+                    <div class="work-item" data-id="poster-design" data-category="design">
+                        <img src="image/広告課題.jpg" alt="ポスターデザイン サムネイル">
+                        <div class="work-title-area">
+                            <h3>ポスターデザイン</h3>
+                        </div>
+                        <div class="work-detail">
+
+                            <p class="work-description">考え中</p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe Illustrator, Clipstudio</li>
+                                <li><strong>ポイント:</strong> 考え中</li>
+                            </ul>
+                            <button class="view-details-button" data-id="poster-design-work"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+                    <div class="work-item" data-id="meisi1-design" data-category="design">
+                        <img src="image/まじめ名刺表.jpg" alt="名刺デザイン サムネイル">
+                        <div class="work-title-area">
+                            <h3>名刺デザイン１</h3>
+                        </div>
+                        <div class="work-detail">
+
+                            <p class="work-description">考え中</p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe Illustrator, Clipstudio</li>
+                                <li><strong>ポイント:</strong> 考え中</li>
+                            </ul>
+                            <button class="view-details-button" data-id="meisi1-design-work"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+                    <div class="work-item" data-id="meisi2-design" data-category="design">
+                        <img src="image/ユニーク名刺表.png" alt="名刺デザイン サムネイル">
+                        <div class="work-title-area">
+                            <h3>名刺デザイン２</h3>
+                        </div>
+                        <div class="work-detail">
+
+                            <p class="work-description">考え中</p>
+                            <ul class="work-info">
+                                <li><strong>技術:</strong> Adobe Illustrator, Clipstudio</li>
+                                <li><strong>ポイント:</strong> 考え中</li>
+                            </ul>
+                            <button class="view-details-button" data-id="meisi2-design-work"
+                                data-action="magnify">表示する</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>CONTACT</h2>
+            <p>
+                ご質問やご依頼がありましたら、お気軽にお問い合わせください。
+            </p>
+            <form class="contact-form" action="#" method="POST">
+                <label for="name">お名前<span>*</span></label>
+                <input type="text" id="name" name="name" required placeholder="例: 貴社名 氏名" />
+
+                <label for="email">メールアドレス<span>*</span></label>
+                <input type="email" id="email" name="email" required placeholder="例: your.email@example.com" />
+
+                <label for="message">お問い合わせ内容<span>*</span></label>
+                <textarea id="message" name="message" rows="6" required
+                    placeholder="採用に関するお問い合わせ、ご質問などございましたら、ご自由にご記入ください。"></textarea>
+
+                <button type="submit">送信</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 KUWAMOTO YOSHIYUKI. All rights reserved.</p>
+    </footer>
+
+    <div id="work-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-button">&times;</span>
+            <div class="modal-inner">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Work Image" />
+                    <div id="modal-thumbnail-nav"></div>
+                </div>
+                <div id="modal-details">
+                    <h3 id="modal-title"></h3>
+                    <p id="modal-description"></p>
+                    <ul id="modal-info"></ul>
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer"
+                        class="view-site-button hidden"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
