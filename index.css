@@ -1,0 +1,1125 @@
+/* Google Fonts に対応 */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #fdfdfd;
+    color: #333;
+    scroll-behavior: smooth;
+    position: relative;
+    overflow-x: hidden;
+    /* 横スクロールを禁止 */
+}
+
+/* === ヘッダー（黒背景、横並び） === */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #000;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.section-buttons {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1.2em;
+    margin: 0;
+    padding: 0.5em 1em;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.section-button {
+    display: inline-block;
+    background: #111;
+    color: white;
+    padding: 0.6em 1em;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.section-button:hover {
+    background: #444;
+}
+
+.section-button span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: none;
+    box-sizing: border-box;
+    vertical-align: middle;
+    min-width: 0.8em;
+    color: white;
+}
+
+/* タイピングアニメーション */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        /* ここはJavaScriptで動的に設定されるので、width: 100% のままでOK */
+        width: var(--final-width, 100%);
+        /* JavaScriptで計算した最終幅を使用 */
+    }
+}
+
+/* カーソルの点滅アニメーション */
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: white;
+    }
+}
+
+.typing-animation {
+    /* animation-fill-mode: forwards; を追加して、アニメーション終了後の状態を維持 */
+    animation: typing var(--typing-duration) steps(var(--char-count), end) forwards,
+        blink-caret 0.75s step-end infinite;
+}
+
+/* === ローディング画面 === */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 9999;
+    /* 他のコンテンツより手前に表示 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    /* visibilityもトランジション対象に */
+}
+
+#loading-screen.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* 非表示時にクリックイベントを無効化 */
+}
+
+/* ローディングパネル */
+.loading-panel {
+    width: 100%;
+    height: 33.33vh;
+    /* 3分割 */
+    background-color: #000;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    /* パディングを含める */
+}
+
+/* SVGテキストのスタイル */
+.loading-text-svg {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 8rem;
+    font-weight: bold;
+    fill: black;
+    /* テキストの塗りつぶし色 */
+    stroke: white;
+    /* テキストの縁の色 */
+    stroke-width: 2px;
+    /* テキストの縁の太さ */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* パネル内のテキストの継続的な横移動アニメーション */
+.loading-text-svg.animate-right-to-left {
+    animation: slideRightToLeft 8s linear infinite;
+    /* 8秒で無限ループ */
+}
+
+.loading-text-svg.animate-left-to-right {
+    animation: slideLeftToRight 8s linear infinite;
+    /* 8秒で無限ループ */
+}
+
+/* キーフレームアニメーションの定義 */
+@keyframes slideRightToLeft {
+    0% {
+        transform: translateX(100%);
+        /* 右端から開始 */
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* 左端まで移動 */
+    }
+}
+
+@keyframes slideLeftToRight {
+    0% {
+        transform: translateX(-100%);
+        /* 左端から開始 */
+    }
+
+    100% {
+        transform: translateX(100%);
+        /* 右端まで移動 */
+    }
+}
+
+/* ローディング画面が消える時のアニメーション */
+/* パネル自体の移動アニメーションを左右方向に変更 */
+#loading-screen.fade-out .loading-panel.top {
+    animation: panelSlideOutLeft 1.5s ease-out forwards;
+}
+
+#loading-screen.fade-out .loading-panel.middle {
+    animation: panelSlideOutRight 1.5s ease-out forwards;
+}
+
+#loading-screen.fade-out .loading-panel.bottom {
+    animation: panelSlideOutLeft 1.5s ease-out forwards;
+}
+
+/* テキストのフェードアウトアニメーションは継続 */
+/* テキストがパネルと一緒に消えるように、textFadeOutアニメーションを適用 */
+#loading-screen.fade-out .loading-panel .loading-text-svg {
+    animation: textFadeOut 1.5s ease-out forwards;
+}
+
+/* TAP/CLICKボタンはフェードアウトさせる */
+#loading-screen.fade-out #tap-button {
+    animation: circleFadeOut 1.5s ease-out forwards;
+}
+
+/* 新しい左右のスライドアウトキーフレーム */
+@keyframes panelSlideOutLeft {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    /* 左へ移動して消える */
+}
+
+@keyframes panelSlideOutRight {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    /* 右へ移動して消える */
+}
+
+/* フェードアウト時のキーフレームアニメーション（テキストは透明になるだけ） */
+@keyframes textFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* circleFadeOutはtap-buttonのみに適用する */
+@keyframes circleFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* TAP/CLICKボタン */
+#tap-button {
+    position: absolute;
+    z-index: 10000;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+    opacity: 0;
+    /* 初期非表示 */
+    visibility: hidden;
+    /* 初期非表示 */
+}
+
+#tap-button:hover {
+    transform: scale(1.05);
+}
+
+#tap-button.fade-in {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-in, visibility 1s ease-in;
+}
+
+/* 円形のテキストSVG */
+.circle-text {
+    position: absolute;
+    opacity: 0;
+    /* 初期非表示 */
+    visibility: hidden;
+    /* 初期非表示 */
+    transition: opacity 1s ease-in, visibility 1s ease-in;
+}
+
+.circle-text.fade-in {
+    opacity: 1;
+    visibility: visible;
+}
+
+.circle-text.outer {
+    width: 600px;
+    /* SVG全体のサイズを大きく */
+    height: 600px;
+    /* SVG全体のサイズを大きく */
+    animation: rotateRight 20s linear infinite;
+    /* 右回り */
+    z-index: 9997;
+    /* 内円よりも奥に */
+}
+
+.circle-text.inner {
+    width: 530px;
+    /* 内円のSVG全体のサイズを調整 (半径240 * 2 + 50 程度の余白) */
+    height: 530px;
+    /* 内円のSVG全体のサイズを調整 */
+    animation: rotateLeft 20s linear infinite;
+    /* 左回り */
+    z-index: 9998;
+    /* 外円よりも手前に */
+}
+
+.circle-text.outer text {
+    /* 外円のテキスト */
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 24px;
+    /* フォントサイズをさらに大きく (20px -> 24px) */
+    fill: white;
+}
+
+.circle-text.inner text {
+    /* 内円のテキスト */
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    /* 内円のフォントサイズはそのまま維持 */
+    fill: white;
+}
+
+.circle-text path {
+    fill: none;
+}
+
+/* 円の回転アニメーション */
+@keyframes rotateRight {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateLeft {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* === メインコンテンツのフェードイン === */
+main {
+    opacity: 0;
+    /* 初期状態では非表示 */
+    transition: opacity 1s ease-in;
+    /* フェードインアニメーション */
+    padding-top: 60px;
+    /* ヘッダーの高さ分、コンテンツを下にずらす */
+}
+
+main.visible-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ヘッダー文字の一文字表示アニメーション */
+@keyframes fadeInOneByOne {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === セクション共通スタイル === */
+section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    color: #2c7ac1;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #2c7ac1;
+    margin: 10px auto 0;
+}
+
+/* About Me セクション */
+#about .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+#about .profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #2c7ac1;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+#about .profile-text {
+    text-align: left;
+    max-width: 700px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+#about .about-text ul {
+    list-style: none;
+    /* リストマーカーを非表示にする */
+    padding-left: 0;
+    /* デフォルトの左パディングを削除（必要に応じて調整） */
+}
+
+/* Skills セクション */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.skill-item {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+}
+
+.skill-item img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.skill-item h3 {
+    font-size: 1.4rem;
+    color: #2c7ac1;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.skill-item p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Works セクション */
+
+.works-intro {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.categories {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-item {
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s, color 0.3s;
+}
+
+.category-item:hover,
+.category-item.active {
+    background: #2c7ac1;
+    color: white;
+    border-color: #2c7ac1;
+}
+
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* ★グリッドアイテムの高さがコンテンツに合わせて個別に調整されるように修正★ */
+    grid-auto-rows: minmax(min-content, max-content);
+}
+
+/* WORKSセクションの各作品アイテム */
+.work-item {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 320px;
+    transition: height 0.5s ease-out;
+    /* ホバー時の高さ変化にアニメーションを適用 */
+}
+
+.works-grid .work-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    /* ★ここを修正/追加★ */
+    display: block;
+    border-radius: 8px 8px 0 0;
+}
+
+.work-detail {
+    background: rgba(255, 255, 255, 0.95);
+    /* 半透明の背景で画像が透けて見えるように */
+    position: absolute;
+    /* 親要素の.work-itemを基準に配置 */
+    bottom: 0;
+    /* 下端からスライド */
+    left: 0;
+    width: 100%;
+    /* 初期状態（非ホバー時） */
+    max-height: 0;
+    padding: 0 25px;
+    opacity: 0;
+    overflow: hidden;
+    /* はみ出たコンテンツを隠す */
+    box-sizing: border-box;
+    /* paddingを含めてwidth/heightを計算 */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.work-item:hover .work-detail {
+    transform: translateY(0);
+    height: auto;
+    max-height: 100%;
+    /* 親のwork-itemの高さに合わせて広がる */
+    /* または、コンテンツの高さより十分大きな固定値 例: max-height: 500px; */
+    padding: 25px;
+    opacity: 1;
+}
+
+.work-detail h3 {
+    font-size: 1.5rem;
+    color: #2c7ac1;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.work-description {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.work-info {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.work-info li {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.work-info li strong {
+    color: #333;
+    display: inline-block;
+    min-width: 80px;
+}
+
+.view-site-button {
+    display: inline-block;
+    background: #2c7ac1;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.view-site-button:hover {
+    background: #235a90;
+}
+
+/* Contact セクション */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 40px auto 0;
+    text-align: left;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.contact-form label span {
+    color: #e74c3c;
+    margin-left: 5px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button[type="submit"] {
+    background: #2c7ac1;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: flex-start;
+    /* 左寄せ */
+}
+
+.contact-form button[type="submit"]:hover {
+    background: #235a90;
+}
+
+/* フッター */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    margin-top: 50px;
+}
+
+/* モーダル */
+.modal {
+    position: fixed;
+    /* 画面に固定 */
+    z-index: 1001;
+    /* ヘッダーより上に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* 半透明の黒背景 */
+    display: flex;
+    /* 中央寄せのため */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    /* 初期状態では非表示 */
+    visibility: hidden;
+    /* イベントも受け付けない */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    /* フェードイン・アウト */
+    overflow-y: auto;
+    /* モーダルコンテンツがはみ出した場合にスクロール可能にする */
+    -webkit-overflow-scrolling: touch;
+    /* iOSでのスムーズなスクロール */
+}
+
+.modal.active,
+.modal.is-active {
+    /* Active classes combined */
+    opacity: 1;
+    /* 表示状態 */
+    visibility: visible;
+    /* イベントを受け付ける */
+    display: flex;
+    /* Ensure display is flex when active */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 10px;
+    /* 以下のプロパティを修正します */
+    width: 90%;
+    /* デスクトップ表示時に画面幅の90%を使用 */
+    max-width: 1400px;
+    /* 最大幅を1400pxに設定（さらに大きくすることも可能） */
+    height: 85vh;
+    /* ビューポートの高さの85%に固定 */
+    max-height: 900px;
+    /* 最大高さを900pxに設定（ビューポートの高さが低い場合に備える） */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+    overflow-y: auto;
+    /* コンテンツがモーダルに収まらない場合に縦スクロールを有効にする */
+    display: flex;
+    /* flexboxを使って内部コンテンツを配置 */
+    flex-direction: column;
+    /* 内部コンテンツを縦方向に並べる */
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+    /* 表示時に元の位置に戻す */
+}
+
+.modal-close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* モーダル内部のレイアウトを横並びに変更 */
+.modal-inner {
+    display: flex;
+    /* Flexboxを有効にする */
+    flex-direction: row;
+    /* アイテムを横並びにする */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    gap: 30px;
+    /* 画像と詳細の間隔を調整 */
+    justify-content: center;
+    /* 横並びアイテムを中央に配置 */
+    align-items: flex-start;
+    /* アイテムを上部に揃える */
+}
+
+.modal-image-container {
+    flex: 2;
+    /* 画像コンテナの幅を広めにする */
+    text-align: center;
+    /* padding-right: 20px; */
+    /* gapで対応するため削除または調整 */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 200px;
+}
+
+#modal-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* サムネイルナビゲーション */
+#modal-thumbnail-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+#modal-thumbnail-nav img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+#modal-thumbnail-nav img:hover {
+    border-color: #007bff;
+    transform: translateY(-2px);
+}
+
+#modal-thumbnail-nav img.active {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+#modal-details {
+    flex: 1;
+    /* 詳細情報の幅を狭めにする */
+    /* padding-left: 20px; */
+    /* gapで対応するため削除または調整 */
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-right: 10px;
+    text-align: left;
+}
+
+#modal-title {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#modal-description {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#modal-info {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+#modal-info li {
+    background-color: #e9e9e9;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: #444;
+}
+
+#modal-info li strong {
+    color: #333;
+    display: inline-block;
+    min-width: 80px;
+}
+
+#modal-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#modal-link:hover {
+    background-color: #0056b3;
+}
+
+.view-site-button.hidden {
+    display: none !important;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: none;
+}
+
+/* パーティクルコンテナ */
+#particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* パーティクルがコンテナからはみ出さないようにする */
+    pointer-events: none;
+    /* 下の要素へのクリックを透過させる */
+    z-index: 9990;
+    /* ローディングテキストの下、背景の上 */
+}
+
+/* 個々のパーティクルスタイリング */
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+    /* 半透明の白 */
+    border-radius: 50%;
+    opacity: 0;
+    /* 最初は見えないようにする */
+    bottom: 0;
+}
+
+/* animationプロパティはJavaScriptで設定するため、@keyframesだけ残します */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.4;
+        /* 発生時の不透明度を調整 (例: 0.4) */
+        transform: translateY(-10%) scale(1);
+    }
+
+    80% {
+        opacity: 0.2;
+        /* 消える前の不透明度を調整 (例: 0.2) */
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .section-button {
+        padding: 0.5em 0.8em;
+        font-size: 0.8rem;
+    }
+
+    section {
+        padding: 40px 15px;
+    }
+
+    section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    #about .profile-container {
+        flex-direction: column;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .works-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loading-text-svg {
+        font-size: 5rem;
+        /* モバイルでは小さく */
+    }
+
+    #tap-button {
+        font-size: 1.2rem;
+        padding: 8px 15px;
+    }
+
+    .circle-text.outer {
+        width: 480px;
+        /* SVG全体のサイズを調整 */
+        height: 480px;
+        /* SVG全体のサイズを調整 */
+    }
+
+    .circle-text.inner {
+        width: 440px;
+        /* 内円のSVG全体のサイズを調整 (半径240 * 2 + 50 程度の余白) */
+        height: 440px;
+        /* 内円のSVG全体のサイズを調整 */
+    }
+
+    .circle-text.outer text {
+        font-size: 18px;
+        /* 外円のフォントサイズをモバイル用に調整 (14px -> 18px) */
+    }
+
+    .circle-text.inner text {
+        font-size: 14px;
+        /* 内円のフォントサイズはモバイルでもこのまま */
+    }
+
+    .modal-inner {
+        flex-direction: column;
+        /* 縦並びにする */
+        overflow-y: auto;
+        gap: 20px;
+        align-items: center;
+        /* モバイルで中央揃え */
+    }
+
+    .modal-image-container,
+    #modal-details {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        flex: none;
+        /* flexを解除 */
+        max-height: none;
+        /* モバイルでは高さ制限を解除し、コンテンツに合わせて伸縮 */
+        overflow-y: visible;
+        /* モバイルでは親のスクロールに任せる */
+    }
+
+    .modal-image-container {
+        padding-bottom: 20px;
+    }
+
+    .modal-content {
+        width: 95%;
+        /* モバイルでの幅を少し広げる */
+        padding: 15px;
+        max-height: 95vh;
+        /* モーダルが画面高さを超えないように */
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-text-svg {
+        font-size: 3rem;
+        /* さらに小さく */
+    }
+
+    #tap-button {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    .circle-text.outer {
+        width: 350px;
+        /* SVG全体のサイズをさらに小さく */
+        height: 350px;
+        /* SVG全体のサイズをさらに小さく */
+    }
+
+    .circle-text.inner {
+        width: 320px;
+        /* 内円のSVG全体のサイズをさらに小さく (半径240 * 2 + 50 程度の余白) */
+        height: 320px;
+        /* 内円のSVG全体のサイズをさらに小さく */
+    }
+
+    .circle-text.outer text {
+        font-size: 15px;
+        /* 外円のフォントサイズをモバイル用に調整 (12px -> 15px) */
+    }
+
+    .circle-text.inner text {
+        font-size: 12px;
+        /* 内円のフォントサイズはモバイルでもこのまま */
+    }
+}
